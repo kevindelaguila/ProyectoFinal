@@ -1,11 +1,11 @@
 <%-- 
-    Document   : Individual
-    Created on : 24/10/2020, 22:41:47
+    Document   : ModificarIndividual
+    Created on : 1/11/2020, 02:33:53
     Author     : famil
 --%>
 
-<%@page import="Modelo.ClienteEmpresa"%>
-<%@page import="DAO.EmpresaDao"%>
+<%@page import="Modelo.ClienteIndividual"%>
+<%@page import="DAO.IndividualDao"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -15,15 +15,15 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     </head>
     <body>
-        <h1>Cliente Empresa</h1>
+        <h1>Cliente Individual</h1>
         <%
             String id = request.getParameter("id");
             String nombre = request.getParameter("nombre");
-            String direccion = request.getParameter("direccion");
-            String contacto = request.getParameter("contacto");
-            if(id==null && nombre==null && direccion==null && contacto==null){
+            String apellido = request.getParameter("apellido");
+            String telefono = request.getParameter("telefono");
+            if(id==null && nombre==null && apellido==null && telefono==null){
             %>
-        <form action="Empresa.jsp" method="POST">
+        <form action="ModificarIndividual.jsp" method="POST">
             <div class="form-group">
                 <label for="id">Id</label> <br>  
         <input type="text" class="form-control" id="id" name="id"><br>
@@ -33,25 +33,25 @@
         <input type="text" class="form-control" id="nombre" name="nombre" ><br>
             </div>            
             <div class="form-group">
-                <label for="direccion">Direccion</label> <br>
-        <input type="text" class="form-control" id="direccion" name="direccion" ><br>     
+                <label for="apellido">Apellido</label> <br>
+        <input type="text" class="form-control" id="apellido" name="apellido" ><br>     
             </div>
             <div class="form-group">
-                <label for="contacto">Telefono</label> <br>
-        <input type="text" class="form-control" id="contacto" name="contacto" ><br><br>
+                <label for="telefono">Telefono</label> <br>
+        <input type="text" class="form-control" id="telefono" name="telefono" ><br><br>
             </div>
             <button type="submit" class="btn btn-primary">Crear</button>
         </form>
         <%   
             }else{
-                EmpresaDao empresa = new EmpresaDao();
-                ClienteEmpresa client = new ClienteEmpresa(Integer.parseInt(id),nombre,direccion,contacto);
-                 System.out.println(Integer.parseInt(id));
+                IndividualDao Individual = new IndividualDao();
+                ClienteIndividual client = new ClienteIndividual(Integer.parseInt(id),nombre,apellido,Integer.parseInt(telefono));
+                System.out.println(Integer.parseInt(id));
 //System.out.println(client);
-empresa.saveEmpresa(client);
+                Individual.changeIndividual(client);
                         %>
             <div class="alert alert-success" role="alert">
-                Cliente creado exitosamente <a href="TablaEmpresas.jsp">Ver</a> 
+                Cliente cambiado exitosamente <a href="TablaIndividual.jsp">Ver Tabla Clientes</a> 
             </div>
             <%
             }
